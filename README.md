@@ -16,6 +16,14 @@ Native, private iPhone-App zur Ernährungserfassung mit SwiftUI, SwiftData und e
 
 Eine über Xcode installierte App mit kostenlosem Personal-Team kann eine erneute Signierung erfordern. Für den Privatgebrauch sind kein App-Login, keine Cloud-Datenbank und kein eigener Server nötig. Die Signierung ist eine Apple-Installationseinstellung, keine Registrierung innerhalb der App.
 
+## Installation mit AltStore Classic
+
+Unter GitHub **Actions → Build IPA for AltStore Classic → Run workflow** auf `main` starten. Nach erfolgreichem Lauf das Artefakt **VeloxNutrition-AltStore-IPA** herunterladen und die äußere ZIP entpacken. Die enthaltene `VeloxNutrition-AltStore.ipa` bleibt unverändert und wird in AltStore Classic auf dem iPhone importiert.
+
+Der Workflow baut die Release-App für echte iPhones ab iOS 17 und prüft ARM64-Architektur, Geräteplattform und IPA-Struktur. Die IPA wird ohne Apple-Zertifikate erzeugt; erst AltStore Classic signiert sie mit dem persönlichen Apple-Konto. Sie ist nicht direkt durch Antippen installierbar und nicht für AltStore PAL bestimmt. Die Simulator-Tests verwenden weiterhin ihre lokale Signatur.
+
+AltStore Classic kann mithilfe von AltServer auf einem Windows-PC installiert werden. Die Installation und regelmäßige Erneuerung beschreibt die [offizielle AltStore-Anleitung](https://faq.altstore.io/altstore-classic/how-to-install-altstore-windows).
+
 ## Implementierte Funktionen
 
 - Tagesübersicht mit Kalorien, Protein, Kohlenhydraten, Fett und Ballaststoffen; fünf horizontale Balken und freiwillige Referenzwerte. Ohne Referenzwert entsteht kein erfundener Fortschrittsprozentsatz.
