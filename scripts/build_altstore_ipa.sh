@@ -11,7 +11,7 @@ xcodebuild -project VeloxNutrition.xcodeproj -scheme VeloxNutrition \
 
 APP_PATH="DerivedData/AltStore/Build/Products/Release-iphoneos/VeloxNutrition.app"
 test -d "$APP_PATH"
-xcrun lipo -verify_arch arm64 "$APP_PATH/VeloxNutrition"
+xcrun lipo "$APP_PATH/VeloxNutrition" -verify_arch arm64
 python3 - "$APP_PATH/Info.plist" <<'PY'
 import plistlib
 import sys
