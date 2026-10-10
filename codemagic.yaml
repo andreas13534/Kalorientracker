@@ -1,4 +1,5 @@
 # Start this workflow manually in Codemagic; no signing credentials are needed.
+# Xcode uses a local ad hoc simulator signature so Keychain access works.
 workflows:
   ios-simulator:
     name: Velox Nutrition - iOS Simulator

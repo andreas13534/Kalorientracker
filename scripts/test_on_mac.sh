@@ -16,4 +16,4 @@ fi
 xcodebuild -project VeloxNutrition.xcodeproj -scheme VeloxNutrition \
   -destination "platform=iOS Simulator,id=$SIMULATOR_ID" \
   -derivedDataPath DerivedData -resultBundlePath "TestResults-$(date +%Y%m%d-%H%M%S).xcresult" \
-  CODE_SIGNING_ALLOWED=NO test
+  CODE_SIGNING_ALLOWED=YES CODE_SIGN_IDENTITY=- test

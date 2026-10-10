@@ -83,7 +83,7 @@ Die `codemagic.yaml` im Repository-Hauptordner enthält den Workflow **Velox Nut
 
 Der Workflow lädt die benötigten Satoshi-Schriften und führt `scripts/test_on_mac.sh` mit den Core-, iOS- und UI-Tests aus. Ein verfügbarer iPhone-Simulator wird automatisch ausgewählt. Apple-Signierungsdaten und ein OpenAI-API-Schlüssel sind für diese lokalen Tests nicht nötig.
 
-Nach erfolgreichem Testlauf stehen `VeloxNutrition-simulator.zip`, das Build-/Testlog und das `TestResults-….xcresult` als Artefakte bereit. Die ZIP-Datei enthält eine unsignierte Simulator-App, die auf einem Mac mit passendem iOS-Simulator installiert werden kann:
+Nach erfolgreichem Testlauf stehen `VeloxNutrition-simulator.zip`, das Build-/Testlog und das `TestResults-….xcresult` als Artefakte bereit. Die ZIP-Datei enthält eine lokal für den Simulator signierte App, die auf einem Mac mit passendem iOS-Simulator installiert werden kann. Diese lokale Signatur benötigt kein Apple-Zertifikat und ermöglicht den Keychain-Zugriff auch während der Tests:
 
 ```bash
 unzip VeloxNutrition-simulator.zip
@@ -101,7 +101,7 @@ Auf einem Mac:
 bash scripts/test_on_mac.sh
 ```
 
-Oder **⌘U** in Xcode. Der Mac-Testlauf erzeugt ein nach dem Zeitpunkt benanntes `TestResults-….xcresult` mit Testergebnissen und UI-Screenshots; mehrere Durchläufe überschreiben sich nicht. Der GitHub-Actions-Workflow führt diese Tests auf einem macOS-Runner aus. Sein tatsächlicher Status ist im Repository unter **Actions** sichtbar.
+Oder **⌘U** in Xcode. Der Mac-Testlauf erzeugt ein nach dem Zeitpunkt benanntes `TestResults-….xcresult` mit Testergebnissen und UI-Screenshots; mehrere Durchläufe überschreiben sich nicht. Der GitHub-Actions-Workflow führt denselben Testlauf auf einem macOS-Runner aus und stellt nach Erfolg die Simulator-App als `iOS-simulator-app` bereit. Sein tatsächlicher Status ist im Repository unter **Actions** sichtbar.
 
 Nach Hinzufügen/Entfernen von Swift- oder Ressourcen-Dateien kann das Projekt deterministisch neu erzeugt werden:
 

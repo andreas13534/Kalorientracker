@@ -6,19 +6,31 @@ on:
 jobs:
   test:
     runs-on: macos-15
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
-      - name: Download app fonts from Fontshare
-        run: python3 scripts/download_fonts.py
-      - name: Core unit tests
-        run: swift test
-      - name: Build and test iPhone app
+      - name: Build and run Core, iOS and UI tests
         run: |
-          SIMULATOR_ID=$(xcrun simctl list devices available -j | python3 -c 'import json,sys; devices=json.load(sys.stdin)["devices"]; phones=[d for key,ds in devices.items() if "iOS" in key for d in ds if "iPhone" in d["name"]]; print(phones[0]["udid"])')
-          xcodebuild -project VeloxNutrition.xcodeproj -scheme VeloxNutrition -destination "platform=iOS Simulator,id=$SIMULATOR_ID" -derivedDataPath DerivedData -resultBundlePath TestResults.xcresult CODE_SIGNING_ALLOWED=NO test
+          set -euo pipefail
+          mkdir -p artifacts
+          bash scripts/test_on_mac.sh 2>&1 | tee artifacts/simulator-tests.log
+      - name: Package simulator app
+        run: |
+          set -euo pipefail
+          APP_PATH="DerivedData/Build/Products/Debug-iphonesimulator/VeloxNutrition.app"
+          test -d "$APP_PATH"
+          ditto -c -k --sequesterRsrc --keepParent "$APP_PATH" artifacts/VeloxNutrition-simulator.zip
+      - name: Upload simulator app
+        uses: actions/upload-artifact@v4
+        with:
+          name: iOS-simulator-app
+          path: artifacts/VeloxNutrition-simulator.zip
+          if-no-files-found: error
       - name: Save test results and screenshots
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: iOS-test-results
-          path: TestResults.xcresult
+          path: |
+            TestResults-*.xcresult
+            artifacts/*.log
