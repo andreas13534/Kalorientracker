@@ -77,6 +77,24 @@ Die Core-Dateien sind direkt in das App-Target eingebunden. Das Swift-Package di
 
 ## Tests und Projektpflege
 
+### Codemagic: Simulator-Build
+
+Die `codemagic.yaml` im Repository-Hauptordner enthält den Workflow **Velox Nutrition - iOS Simulator** (`ios-simulator`). Sobald die Datei auf GitHub liegt, in Codemagic **Check for configuration files** anklicken. Anschließend **Start new build**, den Branch mit der Konfiguration und diesen Workflow auswählen. Builds werden manuell gestartet.
+
+Der Workflow lädt die benötigten Satoshi-Schriften und führt `scripts/test_on_mac.sh` mit den Core-, iOS- und UI-Tests aus. Ein verfügbarer iPhone-Simulator wird automatisch ausgewählt. Apple-Signierungsdaten und ein OpenAI-API-Schlüssel sind für diese lokalen Tests nicht nötig.
+
+Nach erfolgreichem Testlauf stehen `VeloxNutrition-simulator.zip`, das Build-/Testlog und das `TestResults-….xcresult` als Artefakte bereit. Die ZIP-Datei enthält eine unsignierte Simulator-App, die auf einem Mac mit passendem iOS-Simulator installiert werden kann:
+
+```bash
+unzip VeloxNutrition-simulator.zip
+xcrun simctl install booted VeloxNutrition.app
+xcrun simctl launch booted app.veloxnutrition.personal
+```
+
+Vorher einen iPhone-Simulator starten. Diese App ist für den Simulator gebaut und kann nicht auf einem echten iPhone installiert werden. Der erste tatsächliche Codemagic-Lauf muss Build und Tests noch bestätigen.
+
+### Lokaler Testlauf auf dem Mac
+
 Auf einem Mac:
 
 ```bash
