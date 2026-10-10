@@ -1,0 +1,24 @@
+name: iOS build and tests
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+jobs:
+  test:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download app fonts from Fontshare
+        run: python3 scripts/download_fonts.py
+      - name: Core unit tests
+        run: swift test
+      - name: Build and test iPhone app
+        run: |
+          SIMULATOR_ID=$(xcrun simctl list devices available -j | python3 -c 'import json,sys; devices=json.load(sys.stdin)["devices"]; phones=[d for key,ds in devices.items() if "iOS" in key for d in ds if "iPhone" in d["name"]]; print(phones[0]["udid"])')
+          xcodebuild -project VeloxNutrition.xcodeproj -scheme VeloxNutrition -destination "platform=iOS Simulator,id=$SIMULATOR_ID" -derivedDataPath DerivedData -resultBundlePath TestResults.xcresult CODE_SIGNING_ALLOWED=NO test
+      - name: Save test results and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: iOS-test-results
+          path: TestResults.xcresult

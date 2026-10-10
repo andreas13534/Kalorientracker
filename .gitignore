@@ -1,0 +1,18 @@
+.DS_Store
+.build/
+.swiftpm/
+.tools/
+DerivedData/
+Delivery/
+*.xcuserstate
+xcuserdata/
+*.xcresult
+__pycache__/
+*.ipa
+*.mobileprovision
+.env*
+!\.env.example
+# Fontshare licenses embedding, but forbids redistributing raw fonts in public repositories.
+VeloxNutrition/Resources/Fonts/*.otf
+VeloxNutrition/Resources/Fonts/*.ttf
+mac-test.log

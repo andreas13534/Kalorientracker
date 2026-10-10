@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+    <key>CFBundleDevelopmentRegion</key><string>de</string>
+    <key>CFBundleDisplayName</key><string>Velox Nutrition</string>
+    <key>CFBundleExecutable</key><string>$(EXECUTABLE_NAME)</string>
+    <key>CFBundleIdentifier</key><string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+    <key>CFBundleInfoDictionaryVersion</key><string>6.0</string>
+    <key>CFBundleName</key><string>$(PRODUCT_NAME)</string>
+    <key>CFBundlePackageType</key><string>APPL</string>
+    <key>CFBundleShortVersionString</key><string>1.0</string>
+    <key>CFBundleVersion</key><string>1</string>
+    <key>LSRequiresIPhoneOS</key><true/>
+    <key>UIApplicationSceneManifest</key><dict><key>UIApplicationSupportsMultipleScenes</key><false/></dict>
+    <key>UILaunchScreen</key><dict><key>UIColorName</key><string>LaunchBackground</string></dict>
+    <key>UIUserInterfaceStyle</key><string>Dark</string>
+    <key>UISupportedInterfaceOrientations</key><array><string>UIInterfaceOrientationPortrait</string></array>
+    <key>UIAppFonts</key><array><string>Satoshi-Variable.ttf</string><string>Satoshi-Regular.otf</string><string>Satoshi-Medium.otf</string><string>Satoshi-Bold.otf</string></array>
+    <key>NSCameraUsageDescription</key><string>Fotografiere deine Mahlzeit. Ein Foto wird nur bei ausdrücklich gestarteter KI-Analyse an OpenAI gesendet.</string>
+    <key>NSPhotoLibraryUsageDescription</key><string>Wähle ein Foto für deine Mahlzeit aus. Die App erhält nur die von dir ausgewählten Bilder.</string>
+    <key>NSMicrophoneUsageDescription</key><string>Diktiere eine Beschreibung deiner Mahlzeit. Die Aufnahme wird für die lokale Apple-Spracherkennung verwendet.</string>
+    <key>NSSpeechRecognitionUsageDescription</key><string>Wandle deine Mahlzeitbeschreibung mit lokaler Apple-Spracherkennung in bearbeitbaren Text um.</string>
+</dict></plist>
